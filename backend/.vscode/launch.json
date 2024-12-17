@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "PHP XDebug",
+      "type": "php",
+      "request": "launch",
+      "port": 9003,
+      "stopOnEntry": false,
+      "pathMappings": {
+        "C:/xampp/htdocs/bodymap/backend/": "${workspaceRoot}"
+      }
+    }
+  ]
+}
