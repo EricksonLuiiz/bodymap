@@ -1,5 +1,5 @@
-"use client";
-import { useEffect, useState } from "react";
+'use client';
+import { useEffect, useState } from 'react';
 
 interface Usuario {
   ID: number;
@@ -8,7 +8,7 @@ interface Usuario {
 
 export default function ListaUsuarios() {
   const [usuarios, setUsuarios] = useState<Usuario[]>([]);
-  const [erro, setErro] = useState<string>("");
+  const [erro, setErro] = useState<string>('');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -18,15 +18,12 @@ export default function ListaUsuarios() {
   useEffect(() => {
     const buscarUsuarios = async () => {
       try {
-        const resposta = await fetch(
-          "http://127.0.0.1:8888/bodymap/backend/api/usuarios.php",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
+        const resposta = await fetch('http://127.0.0.1/bodymap/backend/api/usuarios.php', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
           },
-        );
+        });
 
         if (!resposta.ok) {
           throw new Error(`Erro HTTP: ${resposta.status}`);
@@ -35,8 +32,8 @@ export default function ListaUsuarios() {
         const dados = await resposta.json();
         setUsuarios(dados);
       } catch (erro) {
-        setErro("Não foi possível carregar os usuários");
-        console.error("Erro ao buscar usuários:", erro);
+        setErro('Não foi possível carregar os usuários');
+        console.error('Erro ao buscar usuários:', erro);
       }
     };
 

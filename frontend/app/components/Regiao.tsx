@@ -50,7 +50,11 @@ interface DadosMusculo {
   image: string;
 }
 
-const API_BASE_URL = 'http://127.0.0.1:8888/bodymap/backend/api';
+const API_BASE_URL = 'http://127.0.0.1/bodymap/backend/api';
+
+function firstLetterToUpperCase(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
 
 export default function Regiao() {
   const [regioes, setRegioes] = useState<Regiao[]>([]);
@@ -145,20 +149,19 @@ export default function Regiao() {
                     {itensRegiao[regiao.region]?.map((item) => (
                       <CarouselItem
                         key={item.id}
-                        className="basis-1/3"
+                        className="basis-2/5"
                         onClick={() => buscarDadosMusculo(item.id)}
                       >
-                        <div className="flex flex-col items-center p-4">
-                          <Image
-                            src={`data:image/jpeg;base64,${item.image}`}
-                            alt={item.name}
-                            width={150}
-                            height={150}
-                            className="rounded-lg"
-                            priority
-                          />
-                          <span className="mt-2 text-center text-sm font-semibold">
-                            {item.name}
+                        <div className="flex flex-col items-center p-4 justify-center">
+                          <div className="h-[100px] flex items-center justify-center">
+                            <img
+                              src={`data:image/jpeg;base64,${item.image}`}
+                              alt={item.name}
+                              className="rounded-lg w-auto h-[100px]"
+                            />
+                          </div>
+                          <span className="mt-2 text-center text-psm font-semibold">
+                            {item.name.toUpperCase()}
                           </span>
                         </div>
                       </CarouselItem>
@@ -177,42 +180,52 @@ export default function Regiao() {
         <DrawerContent>
           <div className="mx-auto w-full max-w-sm">
             <DrawerHeader>
-              <DrawerTitle>{musculoSelecionado?.name || 'Detalhes do Músculo'}</DrawerTitle>
-              <DrawerDescription>Informações detalhadas do músculo selecionado</DrawerDescription>
+              <DrawerTitle>
+                {musculoSelecionado?.name.toUpperCase() || 'Detalhes do Músculo'}
+              </DrawerTitle>
+              <DrawerDescription className="text-sm">
+                Informações detalhadas do músculo selecionado
+              </DrawerDescription>
             </DrawerHeader>
-
             {musculoSelecionado && (
               <div className="p-4">
-                <div className="flex flex-col items-center space-y-4">
-                  <Image
+                <div className="flex flex-col items-center space-y-4 overflow-auto">
+                  <img
                     src={`data:image/jpeg;base64,${musculoSelecionado.image}`}
                     alt={musculoSelecionado.name}
                     width={200}
-                    height={200}
-                    priority
                     className="rounded-lg"
                   />
                   <div className="space-y-2 w-full">
                     <p>
-                      <strong>Origem:</strong> {musculoSelecionado.origin}
+                      <strong>Origem:</strong> {firstLetterToUpperCase(musculoSelecionado.origin)}
+                      {'.'}
                     </p>
                     <p>
-                      <strong>Inserção:</strong> {musculoSelecionado.insertion}
+                      <strong>Inserção:</strong>{' '}
+                      {firstLetterToUpperCase(musculoSelecionado.insertion)}
+                      {'.'}
                     </p>
                     <p>
-                      <strong>Inervação:</strong> {musculoSelecionado.innervation}
+                      <strong>Inervação:</strong>{' '}
+                      {firstLetterToUpperCase(musculoSelecionado.innervation)}
+                      {'.'}
                     </p>
                     <p>
-                      <strong>Ação:</strong> {musculoSelecionado.action}
+                      <strong>Ação:</strong> {firstLetterToUpperCase(musculoSelecionado.action)}
+                      {'.'}
                     </p>
-                    <p>
-                      <strong>Plano de Movimento:</strong> {musculoSelecionado.movementplane}
-                    </p>
+                    {musculoSelecionado.movementplane ? (
+                      <p>
+                        <strong>Plano de Movimento:</strong>{' '}
+                        {firstLetterToUpperCase(musculoSelecionado.movementplane)}
+                        {'.'}
+                      </p>
+                    ) : null}
                   </div>
                 </div>
               </div>
             )}
-
             <DrawerFooter>
               <DrawerClose asChild>
                 <Button variant="outline">Fechar</Button>
