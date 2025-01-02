@@ -24,6 +24,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from '../../components/ui/drawer';
+import { ScrollArea } from '../../components/ui/scroll-area';
 import { Button } from '../../components/ui/button';
 
 interface Regiao {
@@ -50,7 +51,7 @@ interface DadosMusculo {
   image: string;
 }
 
-const API_BASE_URL = 'http://127.0.0.1/bodymap/backend/api';
+const API_BASE_URL = 'http://127.0.0.1:8888/bodymap/backend/api';
 
 function firstLetterToUpperCase(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -136,8 +137,10 @@ export default function Regiao() {
         </div>
       )}
 
-      <div className="w-full max-w-4xl mt-8 mx-auto">
-        <h1 className="text-3xl font-bold text-center mb-6">Região</h1>
+      <div className="w-full max-w-lg mt-8 mx-auto text-center bg-[hsl(var(--card))] shadow-lg rounded-lg p-10">
+        <h2 className="text-3xl font-bold text-center mb-6">BodyMap</h2>
+        <h4>Um mapa completos dos músculos.</h4>
+        <h4 className="mb-[50px]">Origem, inserção e ação.</h4>
 
         {regioes.map((regiao) => (
           <Accordion key={regiao.region} type="single" collapsible>
@@ -149,7 +152,7 @@ export default function Regiao() {
                     {itensRegiao[regiao.region]?.map((item) => (
                       <CarouselItem
                         key={item.id}
-                        className="basis-2/5"
+                        className="basis-2/2 bg-[hsl(var(--card))] cursor-pointer"
                         onClick={() => buscarDadosMusculo(item.id)}
                       >
                         <div className="flex flex-col items-center p-4 justify-center">
@@ -177,8 +180,8 @@ export default function Regiao() {
       </div>
 
       <Drawer open={isOpen} onOpenChange={setIsOpen}>
-        <DrawerContent>
-          <div className="mx-auto w-full max-w-sm">
+        <DrawerContent className="h-full bg-[hsl(var(--card))] border-none">
+          <div className="mx-auto w-auto">
             <DrawerHeader>
               <DrawerTitle>
                 {musculoSelecionado?.name.toUpperCase() || 'Detalhes do Músculo'}
@@ -187,48 +190,55 @@ export default function Regiao() {
                 Informações detalhadas do músculo selecionado
               </DrawerDescription>
             </DrawerHeader>
-            {musculoSelecionado && (
-              <div className="p-4">
-                <div className="flex flex-col items-center space-y-4 overflow-auto">
-                  <img
-                    src={`data:image/jpeg;base64,${musculoSelecionado.image}`}
-                    alt={musculoSelecionado.name}
-                    width={200}
-                    className="rounded-lg"
-                  />
-                  <div className="space-y-2 w-full">
-                    <p>
-                      <strong>Origem:</strong> {firstLetterToUpperCase(musculoSelecionado.origin)}
-                      {'.'}
-                    </p>
-                    <p>
-                      <strong>Inserção:</strong>{' '}
-                      {firstLetterToUpperCase(musculoSelecionado.insertion)}
-                      {'.'}
-                    </p>
-                    <p>
-                      <strong>Inervação:</strong>{' '}
-                      {firstLetterToUpperCase(musculoSelecionado.innervation)}
-                      {'.'}
-                    </p>
-                    <p>
-                      <strong>Ação:</strong> {firstLetterToUpperCase(musculoSelecionado.action)}
-                      {'.'}
-                    </p>
-                    {musculoSelecionado.movementplane ? (
+            <ScrollArea className="p-4 max-h-[60vh] overflow-auto rounded-md scrollbar-custom">
+              {musculoSelecionado && (
+                <div className="p-4">
+                  <div className="flex flex-col items-center space-y-4 overflow-auto">
+                    <img
+                      src={`data:image/jpeg;base64,${musculoSelecionado.image}`}
+                      alt={musculoSelecionado.name}
+                      width={200}
+                      className="rounded-lg"
+                    />
+                    <div className="space-y-2 w-full">
                       <p>
-                        <strong>Plano de Movimento:</strong>{' '}
-                        {firstLetterToUpperCase(musculoSelecionado.movementplane)}
+                        <strong>Origem:</strong> {firstLetterToUpperCase(musculoSelecionado.origin)}
                         {'.'}
                       </p>
-                    ) : null}
+                      <p>
+                        <strong>Inserção:</strong>{' '}
+                        {firstLetterToUpperCase(musculoSelecionado.insertion)}
+                        {'.'}
+                      </p>
+                      <p>
+                        <strong>Inervação:</strong>{' '}
+                        {firstLetterToUpperCase(musculoSelecionado.innervation)}
+                        {'.'}
+                      </p>
+                      <p>
+                        <strong>Ação:</strong> {firstLetterToUpperCase(musculoSelecionado.action)}
+                        {'.'}
+                      </p>
+                      {musculoSelecionado.movementplane ? (
+                        <p>
+                          <strong>Plano de Movimento:</strong>{' '}
+                          {firstLetterToUpperCase(musculoSelecionado.movementplane)}
+                          {'.'}
+                        </p>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+            </ScrollArea>
             <DrawerFooter>
               <DrawerClose asChild>
-                <Button variant="outline">Fechar</Button>
+                <Button
+                  variant="outline"
+                  className="mb-5 w-40 mx-auto bg-[hsl(var(--background))] bg-hover:bg-[hsl(var(--primary))] border-[hsl(var(--primary))] text-white"
+                >
+                  Fechar
+                </Button>
               </DrawerClose>
             </DrawerFooter>
           </div>
