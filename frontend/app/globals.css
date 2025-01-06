@@ -11,6 +11,7 @@ img {
   mix-blend-mode: difference;
 }
 
+
 @layer base {
   :root {
     --bg-person-01: 1 27% 49%;
@@ -19,6 +20,7 @@ img {
     --bg-person-04: 352 78% 85%;
     --background: 2 23% 81%;
     --foreground: 224 71.4% 4.1%;
+    --font-color: 210 10% 23%;
     --card: 0 0% 94%;
     --card-foreground: 224 71.4% 4.1%;
     --popover: 0 0% 100%;
@@ -46,6 +48,7 @@ img {
   .dark {
     --background: 224 71.4% 4.1%;
     --foreground: 210 20% 98%;
+    --font-color: 0 0% 100%;
     --card: 224 71.4% 4.1%;
     --card-foreground: 210 20% 98%;
     --popover: 224 71.4% 4.1%;
