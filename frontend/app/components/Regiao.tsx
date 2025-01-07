@@ -142,7 +142,7 @@ export default function Regiao() {
       )}
 
       <div className="w-full max-w-lg mt-3 mx-auto text-center bg-[hsl(var(--card))] shadow-lg rounded-lg py-10 px-5">
-        <div className="text-[hsl(var(--chart-4))!important]">
+        <div>
           <Image
             priority
             src="logoBodyMap.svg"
@@ -154,7 +154,7 @@ export default function Regiao() {
         </div>
 
         <div className="text-[hsl(var(--font-color))!important]">
-          <h4>Um mapa completos dos músculos.</h4>
+          <h4>Um mapa dos músculos.</h4>
           <h4 className="mb-[16px]">Origem, inserção e ação.</h4>
           <Separator />
         </div>
