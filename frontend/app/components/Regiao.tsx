@@ -29,6 +29,7 @@ import { ScrollArea } from '../../components/ui/scroll-area';
 import { Button } from '../../components/ui/button';
 import InfoItem from './InfoItem';
 import Loading from './loading';
+import { Separator } from '@/components/ui/separator';
 
 interface Regiao {
   id: number | string;
@@ -140,13 +141,13 @@ export default function Regiao() {
         <Loading />
       )}
 
-      <div className="w-full max-w-lg mt-8 mx-auto text-center bg-[hsl(var(--card))] shadow-lg rounded-lg p-10">
+      <div className="w-full max-w-lg mt-3 mx-auto text-center bg-[hsl(var(--card))] shadow-lg rounded-lg py-10 px-5">
         <div className="text-[hsl(var(--chart-4))!important]">
           <Image
             priority
             src="logoBodyMap.svg"
             alt="Logo"
-            className="w-3/5 mx-auto mb-4 [filter:brightness(90%)_invert(20%)_opacity(90%)] [mix-blend-mode:hard-light]"
+            className="w-3/5 mx-auto mb-4 [filter:brightness(100%)_invert(10%)_opacity(100%)] [mix-blend-mode:hard-light] [drop-shadow:5px,5px,5px_rgba(0,0,0,0.8)]!important"
             width={100}
             height={100}
           />
@@ -154,7 +155,8 @@ export default function Regiao() {
 
         <div className="text-[hsl(var(--font-color))!important]">
           <h4>Um mapa completos dos músculos.</h4>
-          <h4 className="mb-[50px]">Origem, inserção e ação.</h4>
+          <h4 className="mb-[16px]">Origem, inserção e ação.</h4>
+          <Separator />
         </div>
 
         {regioes.map((regiao) => (

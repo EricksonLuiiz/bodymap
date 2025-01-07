@@ -11,7 +11,10 @@ function firstLetterUpper($string){
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     try {
-        $query = $conn->query("SELECT DISTINCT region FROM muscle");
+        //Ordenação por sequência corpo
+        // $query = $conn->query("SELECT DISTINCT region FROM muscle ORDER BY FIELD(region, 'pescoço', 'dorso', 'ombro', 'braço', 'antebraço', 'mão', 'tórax', 'abdome', 'quadril', 'coxa', 'perna', 'pé')");
+        //Ordenação Alfabética
+        $query = $conn->query("SELECT DISTINCT region FROM muscle ORDER BY region ASC");
         $regiao = $query->fetchAll(PDO::FETCH_ASSOC);
         foreach ($regiao as $key => $value) {
             $regiao[$key]['region'] = firstLetterUpper($value['region']);
